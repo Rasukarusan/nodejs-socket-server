@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>socket</title>
+  <script src="https://cdn.tailwindcss.com">
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container text-center">
+  <h1 class="font-bold text-2xl">Socket Client</h1>
+  <div id="connection" class="m-4">connecting...</div>
+  <button type="button" onclick="send()" class="text-white bg-blue-400 rounded p-4">Send Message<button>
+  </div>
+
+  <script>
+    const socket = io.connect('http://localhost:6002');
+    // ソケット確立
+    socket.on('connect', function() {
+      const el = document.getElementById('connection')
+      el.textContent = 'Success'
+      el.classList.add('text-green-600')
+    });
+
+    // ソケット確立に失敗
+    socket.on("connect_error", () => {
+      const el = document.getElementById('connection')
+      el.textContent = 'Failed'
+      el.classList.add('text-red-500')
+    });
+
+    // サーバーからメッセージを受信
+    socket.on('iam', function(data) {
+      console.log('受信', data);
+    })
+
+    // サーバーにメッセージを送信
+    function send() {
+      socket.emit('exec', { hoge: 'YHOOOOO!' })
+    }
+  </script>
+</body>
+</html>
