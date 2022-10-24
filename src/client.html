@@ -18,6 +18,7 @@
     const socket = io.connect('http://localhost:6002');
     // ソケット確立
     socket.on('connect', function() {
+      console.log('socket connected')
       const el = document.getElementById('connection')
       el.textContent = 'Success'
       el.classList.add('text-green-600')
@@ -25,6 +26,7 @@
 
     // ソケット確立に失敗
     socket.on("connect_error", () => {
+      console.log('socket connect failed...')
       const el = document.getElementById('connection')
       el.textContent = 'Failed'
       el.classList.add('text-red-500')
