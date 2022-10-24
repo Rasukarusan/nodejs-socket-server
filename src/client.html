@@ -31,13 +31,13 @@
     });
 
     // サーバーからメッセージを受信
-    socket.on('iam', function(data) {
+    socket.on('message', function(data) {
       console.log('受信', data);
     })
 
     // サーバーにメッセージを送信
     function send() {
-      socket.emit('exec', { hoge: 'YHOOOOO!' })
+      socket.send({ hoge: 'YHOOOOO!' })
     }
   </script>
 </body>

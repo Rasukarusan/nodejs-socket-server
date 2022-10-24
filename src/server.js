@@ -24,13 +24,11 @@ io.on('connection', function(socket){
   console.log('Socket connection established');
 
   // クライアントからメッセージを受信
-  socket.on('exec', function(data){
+  socket.on('message', function(data){
     console.log('メッセージ受信:', data)
-    socket.emit('iam', data)
+    socket.send(data)
   });
 });
-
-
 
 /* Create HTTP server for node application */
 const server = http.createServer(app);
