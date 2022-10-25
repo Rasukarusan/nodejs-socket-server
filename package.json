@@ -1,5 +1,4 @@
 {
-
   "name": "nodejs-socket-server",
   "version": "1.0.0",
   "main": "index.js",
@@ -8,6 +7,7 @@
     "dev": "node src/server.js"
   },
   "dependencies": {
+    "chokidar": "^3.5.3",
     "express": "^4.18.2",
     "http": "^0.0.1-security",
     "socket.io": "^4.5.3"

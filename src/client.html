@@ -35,6 +35,7 @@
     // サーバーからメッセージを受信
     socket.on('message', function(data) {
       console.log('受信', data);
+      location.reload()
     })
 
     // サーバーにメッセージを送信
