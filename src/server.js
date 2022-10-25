@@ -41,8 +41,14 @@ const targetDir = process.argv[2]
 console.log('\u001b[35m' + `target = ${targetDir}\n` + '\u001b[0m')
 
 // ファイル変更検知
-chokidar.watch(targetDir, { ignoreInitial: true }).on('all', (event, path) => {
+const opt = {
+  ignored:/(^|[\/\\])\../, // ignore dotfiles
+  ignoreInitial: true,
+}
+chokidar.watch(targetDir, opt).on('all', (event, path) => {
   console.log(event, path)
   // クライアントにファイル変更を通知
-  globalSocket.send('file changed')
+  if (globalSocket) {
+    globalSocket.send('file changed')
+  }
 });
