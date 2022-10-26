@@ -42,7 +42,10 @@ console.log('\u001b[35m' + `target = ${targetDir}\n` + '\u001b[0m')
 
 // ファイル変更検知
 const opt = {
-  ignored:/(^|[\/\\])\../, // ignore dotfiles
+  ignored: [
+    /(^|[\/\\])\../, // ignore dotfiles
+    '*.sql'
+  ],
   ignoreInitial: true,
 }
 chokidar.watch(targetDir, opt).on('all', (event, path) => {
