@@ -37,8 +37,8 @@ if (process.argv.length < 3) {
   process.exit(0)
 }
 
-const targetDir = process.argv[2]
-console.log('\u001b[35m' + `target = ${targetDir}\n` + '\u001b[0m')
+const targetDirs = process.argv.slice(2)
+console.log('\u001b[35m' + `target = ${targetDirs}\n` + '\u001b[0m')
 
 // ファイル変更検知
 const opt = {
@@ -48,7 +48,7 @@ const opt = {
   ],
   ignoreInitial: true,
 }
-chokidar.watch(targetDir, opt).on('all', (event, path) => {
+chokidar.watch(targetDirs, opt).on('all', (event, path) => {
   console.log(event, path)
   // クライアントにファイル変更を通知
   if (globalSocket) {
