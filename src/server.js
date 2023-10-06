@@ -50,6 +50,7 @@ const opt = {
 }
 chokidar.watch(targetDirs, opt).on('all', (event, path) => {
   console.log(event, path)
+  if (path.includes('.sql')) return
   // クライアントにファイル変更を通知
   if (globalSocket) {
     globalSocket.send('file changed')
